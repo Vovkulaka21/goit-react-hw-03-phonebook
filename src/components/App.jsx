@@ -13,6 +13,15 @@ class App extends Component {
     filter: '',
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts.length !== this.state.contacts.length) {
+      localStorage.setItem(
+        'saved-contacts',
+        JSON.stringify(this.state.contacts)
+      );
+    }
+  }
+
   dublicateName({ name }) {
     const normalizeName = name.toLowerCase().replaceAll(' ', '');
     const { contacts } = this.state;
